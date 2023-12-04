@@ -23,15 +23,15 @@ fn main() {
 }
 
 fn games_power(input: &str) -> u32 {
-    input.lines().map(|x| process_game(x)).sum()
+    input.lines().map(process_game).sum()
 }
 
 fn process_game(line: &str) -> u32 {
     let num_re = Regex::new(r"(\d)+").unwrap();
     let game_num = num_re.find(line).unwrap().as_str().parse::<u32>().unwrap_or(0);
 
-    let games = line.split_once(":").unwrap().1;
-    let valid_game = games.split(";").map(|game| game.split(",")).flatten().map(|cube_str| process_cube_str(cube_str)).all(|x| check_cube(x));
+    let games = line.split_once(':').unwrap().1;
+    let valid_game = games.split(';').flat_map(|game| game.split(',')).map(process_cube_str).all(check_cube);
     if valid_game {
         return game_num
     }

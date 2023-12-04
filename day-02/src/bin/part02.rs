@@ -19,7 +19,7 @@ fn main() {
 }
 
 fn games_power(input: &str) -> u32 {
-    input.lines().map(|x| process_game(x)).sum()
+    input.lines().map(process_game).sum()
 }
 
 fn process_game(line: &str) -> u32 {
@@ -27,8 +27,8 @@ fn process_game(line: &str) -> u32 {
     let mut green_max = 0;
     let mut blue_max = 0;
 
-    let games = line.split_once(":").unwrap().1;
-    let cubes: Vec<CubesColor> = games.split(";").map(|game| game.split(",")).flatten().map(|cube_str| process_cube_str(cube_str)).collect();
+    let games = line.split_once(':').unwrap().1;
+    let cubes: Vec<CubesColor> = games.split(';').flat_map(|game| game.split(',')).map(process_cube_str).collect();
     for cube in cubes{
         match cube.color {
             Color::Red => if red_max < cube.val { red_max = cube.val },

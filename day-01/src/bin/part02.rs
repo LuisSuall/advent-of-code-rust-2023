@@ -6,7 +6,7 @@ fn main() {
 }
 
 fn compute_calibration(input: &str) -> u32 {
-    input.lines().into_iter().map(|x| 10*first_number(x)+last_number(x)).sum()
+    input.lines().map(|x| 10*first_number(x)+last_number(x)).sum()
 }
 
 fn first_number(line: &str) -> u32 {
