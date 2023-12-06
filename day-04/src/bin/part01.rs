@@ -21,8 +21,8 @@ fn sum_prices(input: &str) -> u32 {
 fn extract_winning_numbers(input: &str) -> Vec<HashSet<u32>> {
     input
         .lines()
-        .map(|line| line.split_once(":").unwrap().1)
-        .map(|line| line.split_once("|").unwrap().0)
+        .map(|line| line.split_once(':').unwrap().1)
+        .map(|line| line.split_once('|').unwrap().0)
         .map(extract_numbers)
         .map(|numbers| HashSet::from_iter(numbers.iter().cloned()))
         .collect()
@@ -31,7 +31,7 @@ fn extract_winning_numbers(input: &str) -> Vec<HashSet<u32>> {
 fn extract_own_numbers(input: &str) -> Vec<Vec<u32>> {
     input
         .lines()
-        .map(|line| line.split_once("|").unwrap().1)
+        .map(|line| line.split_once('|').unwrap().1)
         .map(extract_numbers)
         .collect()
 }
